@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="/webjars/bootstrap/4.5.1/css/bootstrap.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/4.5.1/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../static/main.js" th:src="@{/main.js}"></script>
+    <meta charset="UTF-8">
+    <title>Lista autorów.</title>
+</head>
+
+<body>
+<div role="main" class="container">
+
+    <div class="starter-template">
+        <H2>Lista autorów.</H2>
+        <!-- Button wycięty z https://getbootstrap.com/docs/4.0/components/modal/ -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAuthorModal">Dodaj autora
+        </button>
+
+        <table class="table table-stripped">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tr th:each="author:${authors}">
+                <td th:text="${author.id}">Id</td>
+                <td th:text="${author.name}">Name</td>
+                <!--<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editAuthorModal">Edytuj</button></td>-->
+                <td><a th:href="@{/authors/getOne/(id=${author.id})}" class="btn btn-warning">Edytuj</a></td>
+                <td><a th:href="@{/authors/delete/(id=${author.id})}" class="btn btn-danger" id="deleteButton">Usuń</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- ciało wycięte z https://getbootstrap.com/docs/4.0/components/modal/ dokładniej z Varying modal content -->
+<div class="modal fade" id="addAuthorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <!-- Wklejony form tutaj. Nie mam pojęcia dlaczego. -->
+    <form th:action="@{/authors/addNew}" method="post">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAuthorModalLabel">Nowy autor.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--<form> Wycięty form stąd -->
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Id:</label>
+                        <input type="text" class="form-control" id="recipient-id" name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="name">
+                    </div>
+                    <!--</form> Wycięty /form stąd -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                </div>
+            </div>
+        </div>
+        <!-- Wklejony /form tutaj. Nie mam pojęcia dlaczego.-->
+    </form>
+</div>
+
+<div class="modal fade" id="editAuthorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <!-- Wklejony form tutaj. Nie mam pojęcia dlaczego. -->
+    <!-- zmienione addNew to update oraz post na put -->
+    <form th:action="@{/authors/update}" method="put">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edytuj autora.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--<form> Wycięty form stąd -->
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Id:</label>
+                        <input type="text" class="form-control" id="editId" name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="editName" name="name">
+                    </div>
+                    <!--</form> Wycięty /form stąd -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                </div>
+            </div>
+        </div>
+        <!-- Wklejony /form tutaj. Nie mam pojęcia dlaczego.-->
+    </form>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteAuthorModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Potwierdź usunięcie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Czy jesteś pewien, że chcesz usunąć ten rekord?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary" id="delRef">Tak, usuń.</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

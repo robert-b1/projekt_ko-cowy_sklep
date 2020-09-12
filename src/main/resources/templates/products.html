@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista produktów.</title>
+</head>
+<body>
+<H2>Lista produktów.</H2>
+<table class="table table-stripped">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Category</td>
+        <td>Price</td>
+        <td>Author</td>
+        <td>Created</td>
+    </tr>
+    </thead>
+    <tr th:each="product:${products}">
+        <td th:text="${product.id}">Id</td>
+        <td th:text="${product.name}">Name</td>
+        <td th:text="${product.description}">Description</td>
+        <td th:text="${product.category}">Category</td>
+        <td th:text="${product.price}">Price</td>
+        <td th:text="${product.author}">Author</td>
+        <td th:text="${product.created}">Created</td>
+    </tr>
+</table>
+</body>
+</html>

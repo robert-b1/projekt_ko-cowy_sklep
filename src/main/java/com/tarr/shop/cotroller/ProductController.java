@@ -1,7 +1,7 @@
 package com.tarr.shop.cotroller;
 
-import com.tarr.shop.dao.AuthorService;
-import com.tarr.shop.model.Author;
+import com.tarr.shop.dao.ProductService;
+import com.tarr.shop.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,40 +14,40 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/authors")
-public class AuthorController {
+@RequestMapping("/products")
+public class ProductController {
 
     @Autowired
-    private AuthorService authorService;
+    private ProductService productService;
 
     @RequestMapping("/getAll")
     public String getAll(Model model) {
-        List<Author> authors = authorService.getAll();
-        model.addAttribute("authors", authors);
-        return "authors";
+        List<Product> products = productService.getAll();
+        model.addAttribute("products", products);
+        return "products";
     }
 
     @RequestMapping("/getOne")
     @ResponseBody
-    public Optional<Author> getOne(Integer id) {
-        return authorService.getOne(id);
+    public Optional<Product> getOne(Integer id) {
+        return productService.getOne(id);
     }
 
     @PostMapping("/addNew")
-    public String addNew(Author author) {
-        authorService.addNew(author);
-        return "redirect:/authors/getAll";
+    public String addNew(Product product) {
+        productService.addNew(product);
+        return "redirect:/products/getAll";
     }
 
     @RequestMapping(value = "/update", method = {RequestMethod.PUT, RequestMethod.GET})
-    public String update(Author author) {
-        authorService.update(author);
-        return "redirect:/authors/getAll";
+    public String update(Product product) {
+        productService.update(product);
+        return "redirect:/products/getAll";
     }
 
     @RequestMapping(value = "/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(Integer id) {
-        authorService.delete(id);
-        return "redirect:/authors/getAll";
+    public String delete(Integer Id) {
+        productService.delete(Id);
+        return "redirect:/products/getAll";
     }
 }
