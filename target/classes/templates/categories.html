@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista kategorii.</title>
+</head>
+<body>
+<H2>Lista kategorii.</H2>
+<table class="table table-stripped">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Parent</td>
+    </tr>
+    </thead>
+    <tr th:each="category:${categories}">
+        <td th:text="${category.id}">Id</td>
+        <td th:text="${category.name}">Name</td>
+        <td th:text="${category.parent}">Parent</td>
+    </tr>
+</table>
+</body>
+</html>

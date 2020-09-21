@@ -46,8 +46,8 @@ public class AuthorController {
     }
 
     @RequestMapping(value = "/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(Integer id) {
-        authorService.delete(id);
+    public String delete(Integer Id) {
+        authorService.delete(Id);
         return "redirect:/authors/getAll";
     }
 }
